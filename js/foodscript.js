@@ -329,35 +329,28 @@
         bigString += "<h4>" + obj.name + "</h4>";
        
         bigString += "<br>";
-        bigString += "<img src=\"" + obj.images[0].hostedLargeUrl + "\" />"
-        
-        if(obj.prepTime){
-            bigString += "<p><span class='bold'>Prep time:</span> " + obj.prepTime + "</p>";
-        }
+        bigString += "<div id='food_image'><img src=\"" + obj.images[0].hostedLargeUrl + "\" /><div>"
         
         if(obj.cookTime){
-            bigString += "<p><span class='bold'>Cook time:</span> " + obj.cookTime + "</p>";
-        }
-        
-        if(obj.numberOfServings){
-            bigString += "<p><span class='bold'>Servings:</span> " + obj.numberOfServings + "</p>";
+            bigString += "<h5><span class='bold'>Cook time:</span> " + obj.cookTime + "</h5>";
         }
        
-        bigString += "<p><span class='bold'>Ingredients:</span></p>";
+        bigString += "<h5><span class='bold'>Ingredients:</span></h5>";
 
         //create a new set to check for duplicates
         ingredientArray = Array.from(new Set(obj.ingredientLines));
 
+        bigString+= "<section class='ingredients'>";
         for(var i=0; i<ingredientArray.length; i++){
-                bigString += "<p class='ingredients'>"+ingredientArray[i]+"</p>";
+                bigString += "<p>"+ingredientArray[i]+"</p>";
             }
-
+        bigString+= "</section>";
+        
         //add a link to the dish
         if(obj.attribution.url){
-            bigString += "<br><p><a href=" + obj.attribution.url + " target= '_blank'>  More at Yummly Link </a></p>";
+            bigString += "<br><p id='yummly_link'><a id= href=" + obj.attribution.url + " target= '_blank'>  More at Yummly Link </a></p>";
         }      
-        
-        bigString += "<br>";
+
         div.innerHTML = bigString;
         
         //hide the map and show the arrows and lazy button
@@ -400,7 +393,7 @@
     //calculates how much to move the page pased on panning gesture
     function panPage(e){  
         var page = document.querySelector("#results");
-        var percentage = 100 / totalPageNum * e.deltaX / window.innerWidth;
+        var percentage = (100 / totalPageNum) * (e.deltaX / (window.innerWidth));
         var transformPercentage = percentage - 100 / totalPageNum * currentPageNum;
         
         page.style.transform = 'translateX(' + transformPercentage + '%)';
