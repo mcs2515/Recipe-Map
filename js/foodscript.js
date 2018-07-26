@@ -4,7 +4,7 @@
     //url, id, search params
     var YUMMLY_URL = "https://api.yummly.com/v1/api/recipes?_app_id=fb72c077&_app_key=f6ef20b35813502c3869ff8b2341d09e";
     
-    var GET_RECIPE_URL = "https://api.yummly.com/v1/api/recipe/"
+    var GET_RECIPE_URL = "https://api.yummly.com/v1/api/recipe/";
 
     var GOOGLE_PLACES_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
     
@@ -37,9 +37,7 @@
     var recipeID= undefined;
     
     //variables to use with the food api
-    var currentPageNum=0,
-        totalPageNum = undefined,
-        ingredientArray = [],
+    var ingredientArray = [],
         checkedIngredients = undefined;
     
     //variables used with the maps api
@@ -58,18 +56,6 @@
     var closed = false;
 
     function init(){
-        var myElement = document.querySelector('#results');
-        // by default, it only adds horizontal recognizers
-        var sm = new Hammer.Manager(myElement,{
-                        touchAction: 'pan-y',
-                    });
-        sm.add( new Hammer.Pan({ threshold: 0, pointers: 0 }) );
-
-        // listen to events...
-        sm.on("panleft panright", function(e) {
-            panPage(e, 0);
-        });
-        
         //getting the allergies check box options by calling getCheckBox
         getCheckBox("#dairy", function(v) { dairyCheck = v; });
         getCheckBox("#gluten", function(v) { glutenCheck = v; });
@@ -94,34 +80,10 @@
 //            
 //            firstSearch = true;
             searchFoodURL();
+            
         }
         document.querySelector('#lazyButton').onclick = searchRestaurantURL;
         
-        //change the page number and div box when arrows are pressed
-        document.querySelector('#nextArrow').onclick = function(e){
-            nextPage(-1);
-        };
-        
-        document.querySelector('#prevArrow').onclick = function(){
-            nextPage(1);
-        };
-        
-//        document.querySelector('#click').onclick = function(){
-//            var menu = document.querySelector('.menu');
-//            
-//            if(closed){
-//                document.querySelector('#click').textContent = "Expand Menu";
-//                menu.style.maxHeight = "5em";
-//                //menu.style.overflow = "hidden";
-//                closed = false;
-//            }
-//            else{
-//                document.querySelector('#click').textContent = "Close Menu";
-//                menu.style.maxHeight = "33em";
-//                //menu.style.overflow = "visible";
-//                closed = true;
-//            }
-//        }
         
         //set up map stuff
         var mapOptions = {
@@ -135,28 +97,8 @@
         //get user's current loction with HTML5 geolocation
         getLocation();
         clearMarkers();
+        
     }
-    
-    //constantly checks for window width
-//    var windowsize = $(window).width();
-//
-//    $(window).resize(function() {
-//      windowsize = $(window).width();
-//      if (windowsize > 800) {
-//        //if the window is greater than 440px wide then turn on jScrollPane..
-//          document.querySelector('.menu').style.height = "100vh";
-//      }
-//      else{
-//          
-//          if(firstSearch){
-//              document.querySelector('.menu').style.height = "30em";  
-//          }
-//          else{
-//             document.querySelector('.menu').style.height = "25em";   
-//          }
-//      }
-//    });
-
     
     //==============method creates an URL FOR YUMMLY to load info based on user input=============================
     function searchFoodURL(){
@@ -249,87 +191,87 @@
     function getData(url, func) {
         //get the json
         //console.log("loading " + url); //print out the url to json
-        $("#results").fadeOut(500);   //give animation
+        $(".results").fadeOut(500);   //give animation
         $("#mapPage").fadeOut(500);   //give animation
-        $()
-		$.ajax({
-		  dataType: "json",
-		  url: url,
-		  data: null,
-		  success: func
-		});
+        
+        $.ajax({
+          dataType: "json",
+          url: url,
+          data: null,
+          success: func
+        });
+        
      }
     
     //======================CREATE BODY HTML based on the food obj's info==============================================
     function foodJsonLoaded(obj){
-        //reset the page number
-        currentPageNum=0;
         
         // if there's an error, print a message and return
-		if(obj.error){
-			var status = obj.status;
-			var description = obj.description;
-			document.querySelector("#results").innerHTML = "<h3 class='issues'><b>Error!</b></h3>" + "<p class='issues'><i>" + status + "</i><p>" + "<p><i>" + description + "</i><p>";
-			$("#results").fadeIn(500);
-			return; // Bail out
-		}
-		
-		// if there are no results, print a message and return
-		if(obj.matches == 0){
-			var status = "No results found";
-			document.querySelector("#results").innerHTML = "<p class='issues'><i>" + status + "</i><p>" + "<p><i>";
-			$("#results").fadeIn(500);
-			return; // Bail out
-		}
-		
-		if(obj.total_items == 1){
+        if(obj.error){
+          var status = obj.status;
+          var description = obj.description;
+          document.querySelector(".results").innerHTML = "<h3 class='issues'><b>Error!</b></h3>" + "<p class='issues'><i>" + status + "</i><p>" + "<p><i>" + description + "</i><p>";
+          $(".results").fadeIn(500);
+          return; // Bail out
+        }
+
+        // if there are no results, print a message and return
+        if(obj.matches == 0){
+          var status = "No results found";
+          document.querySelector(".results").innerHTML = "<p class='issues'><i>" + status + "</i><p>" + "<p><i>";
+          $(".results").fadeIn(500);
+          return; // Bail out
+        }
+        
+        if(obj.total_items == 1){
             var object = [obj.event]; 
             return object;
         }
         
-		// If there is an array of results, loop through them
-		var alldishes = obj.matches;
-        
-        totalPageNum = alldishes.length;
-		//console.log("alldishes.length = " + alldishes.length);
-        
-        //clear the results section 
-        var page = document.querySelector("#results");
-        page.innerHTML = "";
+        // If there is an array of results, loop through them
+        var alldishes = obj.matches;
 
-		// loop through recipe ids
+        //clear the results section 
+        document.querySelector(".results").innerHTML = "";
+        
+        
+        // loop through recipe ids
         for(var i= 0 ; i <alldishes.length; i++){
             
             recipeID = alldishes[i].id;
+            console.log(recipeID);
+            
             var recipeUrl = GET_RECIPE_URL; //reset the recipeURL
             recipeUrl += recipeID + "?";  //add on new recipe id to url
             recipeUrl += "_app_id=fb72c077&_app_key=f6ef20b35813502c3869ff8b2341d09e";  //add my id and key
-            
-            //create a unique div box for each recipe id
-            var divBox = document.createElement('div');
-            divBox.id = "recipe_" + recipeID;
-            divBox.className = "dish" + " page_" + i;
-            //add div to page
-            document.querySelector("#results").appendChild(divBox);
-            
+
             //call method to load the json for the recipe id
-            getData(recipeUrl, recipeLoaded);            
+            getData(recipeUrl, recipeLoaded);    
+					
         }
+        //activateSlick();
+        //hide the map and show the arrows and lazy button
+        document.querySelector('#lazyButton').style.display= 'block';
+        document.querySelector('#mapDiv').style.display= 'none';
+        document.querySelector('#mapPage').style.display= 'none';
+        $(".results").fadeIn(500);
         
-        //reset page label and start/show page 1
-        snapToPage(-1,page);
-        document.querySelector('#pageLabel').innerHTML = "Page: " + (currentPageNum +1) + "/" + totalPageNum;
     }
     
     //======================LOADS DETAILED DISH INFO==================================================================
     function recipeLoaded(obj){
-        var div = document.querySelector("#recipe_" + obj.id);
+        unSlick();
+        //create a unique div box for each recipe id
+        var divBox = document.createElement('div');
+        divBox.className = "dish";
+        
         //console.log(div);
-         var bigString= "<img id= 'bookmark' src=media/bookmark.png >"
+        var bigString= "<img class= 'bookmark' src=media/bookmark.png >"
         bigString += "<h4>" + obj.name + "</h4>";
        
         bigString += "<br>";
-        bigString += "<div id='food_image'><img src=\"" + obj.images[0].hostedLargeUrl + "\" /><div>"
+        bigString += "<div class='food_image'><img src=\"" + obj.images[0].hostedLargeUrl + "\" /></div>";
+        bigString += "<div class= 'detail_div'>";
         
         if(obj.cookTime){
             bigString += "<h5><span class='bold'>Cook time:</span> " + obj.cookTime + "</h5>";
@@ -340,111 +282,40 @@
         //create a new set to check for duplicates
         ingredientArray = Array.from(new Set(obj.ingredientLines));
 
-        bigString+= "<section class='ingredients'>";
+        bigString+= "<ul class='ingredients'>";
         for(var i=0; i<ingredientArray.length; i++){
-                bigString += "<p>"+ingredientArray[i]+"</p>";
+                bigString += "<li>"+ingredientArray[i]+"</li>";
             }
-        bigString+= "</section>";
+        bigString+= "</ul>";
+        bigString += "</div>";
         
         //add a link to the dish
         if(obj.attribution.url){
-            bigString += "<br><p id='yummly_link'><a id= href=" + obj.attribution.url + " target= '_blank'>  More at Yummly Link </a></p>";
-        }      
-
-        div.innerHTML = bigString;
-        
-        //hide the map and show the arrows and lazy button
-        document.querySelector('.pageControl').style.display= 'block';
-        document.querySelector('#lazyButton').style.display= 'block';
-        document.querySelector('#mapDiv').style.display= 'none';
-        document.querySelector('#mapPage').style.display= 'none';
-        $(".pageControl").fadeIn(500);
-		$("#results").fadeIn(500);
-    }
-    
-    
-    //====================DISPLAY EACH RECIPE PAGE and use panning animation=====================
-    /*//old way
-    function displayPage(){  
-        for(var i = 0; i < totalPageNum; i++) {
-            var page = document.querySelector('.page_' + i);
-            if(i != currentPageNum){             
-                $(page)
-                    .stop(true, true)
-                    .animate({
-                        marginLeft: '250px',
-                        opacity:0
-                    },1000);     
-            } else {
-                $(page)
-                    .stop(true, true)
-                    .animate({
-                        marginLeft: '0px',
-                        opacity:1
-                    },1000);
-            }
+            bigString += "<div class='yummly_link'><p><a id= href=" + obj.attribution.url + " target= '_blank'>  More at Yummly Link </a></p></div>";
         }
-        
-        //change the page number on page
-        document.querySelector('#pageLabel').innerHTML = "Page: " + (currentPageNum +1) + "/" + totalPageNum;
-    }
-    */
+
+        divBox.innerHTML = bigString;
+        //add div to page
+        document.querySelector(".results").appendChild(divBox);
+        activateSlick();
+		}
     
-    //calculates how much to move the page pased on panning gesture
-    function panPage(e){  
-        var page = document.querySelector("#results");
-        var percentage = (100 / totalPageNum) * (e.deltaX / (window.innerWidth));
-        var transformPercentage = percentage - 100 / totalPageNum * currentPageNum;
-        
-        page.style.transform = 'translateX(' + transformPercentage + '%)';
-        
-        if(e.isFinal) { //this only runs on event end
-            if(percentage < 0)
-              snapToPage(currentPageNum + 1, page);
-            else if(percentage > 0)
-              snapToPage(currentPageNum - 1, page);
-            else
-              snapToPage(currentPageNum, page);
-        }  
+    function activateSlick(){
+        if(!$(".results").hasClass('slick-initialized')){
+            $(".results").slick({
+                dots: true,
+                arrows: false,
+                infinite: true,
+            });
+        }
     }
     
-    //snaps the page to "center" of screen and changes the page number
-    function snapToPage(num, page){
-      if(num < 0)
-        currentPageNum = 0;
-      else if(num > totalPageNum - 1)
-        currentPageNum = totalPageNum - 1;
-      else
-        currentPageNum = num;
-        
-        var percentage = -(100 / totalPageNum) * currentPageNum;
-        page.style.transform = 'translateX(' + percentage + '%)';
-        
-        //change the page number on page
-        document.querySelector('#pageLabel').innerHTML = "Page: " + (currentPageNum +1) + "/" + totalPageNum;
+    function unSlick(){
+        if($(".results").hasClass('slick-initialized')){
+            $(".results").slick("destroy");
+        }
     }
     
-    //automatically pans the page when prev & next arrows are clicked
-    function nextPage(num){  
-        var page = document.querySelector("#results");
-        var percentage = 100 / (totalPageNum) *num;
-        
-        if(percentage < 0)
-          snapToPage(currentPageNum + 1, page);
-        else if(percentage > 0)
-          snapToPage(currentPageNum - 1, page);
-        else
-          snapToPage(currentPageNum, page);
-    }
-
-function scrollPage(e){  
-        var page = document.querySelector("#results");
-        var percentage = 100 / totalPageNum * e.deltaY / window.innerHeight;
-
-        page.style.transform = 'translateY(' + percentage + '%)'; 
-    }
-
-        
     //=======================CHECKS FOR FOOD ALLERGENS OPTIONS==========================================================
     function getCheckBox(id, food){
         document.querySelector(id).onchange = function(e) {
@@ -454,14 +325,13 @@ function scrollPage(e){
     
     //=======================LOADS RESTAURANT LOCATIONS=================================================================
      function mapsJsonLoaded(obj){
-        var div = document.querySelector("#mapTitle");
-        // If there is an array of results, loop through them
-		var allrestaurants = obj.results;
-         //clear all markers
-         clearMarkers();
-
-		//console.log("allrestaurants.length = " + allrestaurants.length);
-        //console.dir(obj);
+			 var div = document.querySelector("#mapTitle");
+			 // If there is an array of results, loop through them
+			 var allrestaurants = obj.results;
+			 clearMarkers();
+			 
+			 //console.log("allrestaurants.length = " + allrestaurants.length);
+			 //console.dir(obj);
         
         var bigString = "<h4 id = 'mapTitle'> Here are nearby restaurants within " + miles+" miles</h4>";
         bigString += "<br>";
@@ -479,7 +349,6 @@ function scrollPage(e){
             } 
          }
          
-        document.querySelector('.pageControl').style.display= 'none';
         document.querySelector('#lazyButton').style.display= 'none';
         document.querySelector('#mapPage').style.display= 'block';
         document.querySelector('#mapDiv').style.display= 'block';
