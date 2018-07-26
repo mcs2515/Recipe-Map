@@ -82,6 +82,9 @@ input{
     border: 0;
 }
 
+#searchBar, #searchButton, 
+#cuisine, #course, #lazyButton:focus {outline:0;}
+
 #searchButton:hover, #lazyButton:hover{
     cursor: pointer; 
     background-color:black;
@@ -118,13 +121,13 @@ input{
 }
 
  label{
-		font-family:'Montserrat', sans-serif;
-		font-weight: 600;
-		width: 85%;
-		float: left;
-		cursor: pointer;
-    padding-top: 5pt;
-     color: #393630;
+	 font-family:'Montserrat', sans-serif;
+	 font-weight: 600;
+	 width: 85%;
+	 float: left;
+	 cursor: pointer;
+	 padding-top: 5pt;
+	 color: #393630;
 }
 
 input[type="checkbox"] + label {
@@ -164,15 +167,9 @@ input[type="checkbox"]:checked + label:before {
 }
 
 #foodPage{
-    width: auto;
     overflow-x: hidden;
     background-color: #E7E0D5;
     height: 100vh;
-}
-
-.results{
-    width: 100%;
-    display: inline-flex;
 }
 
 .dish{
@@ -187,6 +184,8 @@ input[type="checkbox"]:checked + label:before {
     margin: 2em 3em;
     border: 1pt solid white;
 }
+
+.dish:focus {outline:0;}
 
 .dish h4{
     text-align: center;
@@ -245,6 +244,8 @@ input[type="checkbox"]:checked + label:before {
 .yummly_link{
     width: 100%;
 }
+
+.yummly_link a:focus {outline:0;}
 
 .yummly_link p{
     margin: 0 auto;

@@ -28,18 +28,6 @@
         soyUrl = "400^Soy-Free",
         treeNutUrl = "395^Tree Nut-Free";
     
-    //variables for user input
-    var searchItem = undefined,
-        cuisineOption = undefined,
-        courseOption = undefined;
-    
-    //url for recipe id
-    var recipeID= undefined;
-    
-    //variables to use with the food api
-    var ingredientArray = [],
-        checkedIngredients = undefined;
-    
     //variables used with the maps api
     var map,
         infoWindow,
@@ -64,9 +52,6 @@
         getCheckBox("#soy", function(v) { soyCheck = v; });
         getCheckBox("#treeNut", function(v) { treeNutCheck = v; });
         
-        //checks if the user uses the enter or left or right arrow keys
-        document.onkeydown = checkKey;
-        
         //hide the map and lazy button
         document.querySelector('#mapDiv').style.display= 'none';
         document.querySelector('#mapPage').style.display= 'none';
@@ -82,8 +67,6 @@
             searchFoodURL();
             
         }
-        document.querySelector('#lazyButton').onclick = searchRestaurantURL;
-        
         
         //set up map stuff
         var mapOptions = {
@@ -105,9 +88,9 @@
         // build food URL
         var url = YUMMLY_URL;
         //get the values of each selection
-        searchItem = document.querySelector('#searchBar').value;
-        cuisineOption = document.querySelector('#cuisine').value;
-        courseOption = document.querySelector('#course').value;
+        var searchItem = document.querySelector('#searchBar').value;
+        var cuisineOption = document.querySelector('#cuisine').value;
+        var courseOption = document.querySelector('#course').value;
         
         //check to see if user entered an item to search
         if(searchItem != null || searchItem != ""){
@@ -158,7 +141,7 @@
         // build food URL
         var url = GOOGLE_PLACES_URL;
         //get the values of each selection
-        cuisineOption = document.querySelector('#cuisine').value;
+        var cuisineOption = document.querySelector('#cuisine').value;
         //in meters --- milesx1609.344 = meter
         radius = miles*1609.344;
         type = 'restaurant';
@@ -238,7 +221,7 @@
         // loop through recipe ids
         for(var i= 0 ; i <alldishes.length; i++){
             
-            recipeID = alldishes[i].id;
+            var recipeID = alldishes[i].id;
             console.log(recipeID);
             
             var recipeUrl = GET_RECIPE_URL; //reset the recipeURL
@@ -280,7 +263,7 @@
         bigString += "<h5><span class='bold'>Ingredients:</span></h5>";
 
         //create a new set to check for duplicates
-        ingredientArray = Array.from(new Set(obj.ingredientLines));
+        var ingredientArray = Array.from(new Set(obj.ingredientLines));
 
         bigString+= "<ul class='ingredients'>";
         for(var i=0; i<ingredientArray.length; i++){
@@ -305,7 +288,9 @@
             $(".results").slick({
                 dots: true,
                 arrows: false,
-                infinite: true,
+								infinite:false,
+								variableWidth: true,
+							centerMode: true,
             });
         }
     }
