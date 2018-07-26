@@ -55,7 +55,7 @@
         //hide the map and lazy button
         document.querySelector('#mapDiv').style.display= 'none';
         document.querySelector('#mapPage').style.display= 'none';
-        document.querySelector('#lazyButton').style.display= 'none';
+       // document.querySelector('#lazyButton').style.display= 'none';
         
         //call respective functions when buttons are pressed
         document.querySelector('#searchButton').onclick = function(){
@@ -234,7 +234,7 @@
         }
         //activateSlick();
         //hide the map and show the arrows and lazy button
-        document.querySelector('#lazyButton').style.display= 'block';
+//        document.querySelector('#lazyButton').style.display= 'block';
         document.querySelector('#mapDiv').style.display= 'none';
         document.querySelector('#mapPage').style.display= 'none';
         $(".results").fadeIn(500);
@@ -290,7 +290,7 @@
                 arrows: false,
 								infinite:false,
 								variableWidth: true,
-							centerMode: true,
+								centerMode: true,
             });
         }
     }
@@ -334,7 +334,7 @@
             } 
          }
          
-        document.querySelector('#lazyButton').style.display= 'none';
+//        document.querySelector('#lazyButton').style.display= 'none';
         document.querySelector('#mapPage').style.display= 'block';
         document.querySelector('#mapDiv').style.display= 'block';
         $("#mapPage").fadeIn(500);
