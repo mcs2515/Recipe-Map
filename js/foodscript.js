@@ -5,9 +5,7 @@
     var YUMMLY_URL = "https://api.yummly.com/v1/api/recipes?_app_id=fb72c077&_app_key=f6ef20b35813502c3869ff8b2341d09e";
     
     var GET_RECIPE_URL = "https://api.yummly.com/v1/api/recipe/";
-
     var GOOGLE_PLACES_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-    
     var GOOGLEPLACES_URL_KEY = "AIzaSyCungfivBrAQpvrF-jwK092ZPvLyNwPvFM";
     
     //checkbox bool variables
@@ -45,12 +43,12 @@
 
     function init(){
         //getting the allergies check box options by calling getCheckBox
-        getCheckBox("#dairy", function(v) { dairyCheck = v; });
-        getCheckBox("#gluten", function(v) { glutenCheck = v; });
-        getCheckBox("#peanut", function(v) { peanutCheck = v; });
-        getCheckBox("#seafood", function(v) { seafoodCheck = v; });
-        getCheckBox("#soy", function(v) { soyCheck = v; });
-        getCheckBox("#treeNut", function(v) { treeNutCheck = v; });
+        getCheckBox("#dairy", function(e) { dairyCheck = e; });
+        getCheckBox("#gluten", function(e) { glutenCheck = e; });
+        getCheckBox("#peanut", function(e) { peanutCheck = e; });
+        getCheckBox("#seafood", function(e) { seafoodCheck = e; });
+        getCheckBox("#soy", function(e) { soyCheck = e; });
+        getCheckBox("#treeNut", function(e) { treeNutCheck = e; });
         
         //hide the map and lazy button
         document.querySelector('#mapDiv').style.display= 'none';
@@ -220,17 +218,18 @@
         
         // loop through recipe ids
         for(var i= 0 ; i <alldishes.length; i++){
-            
-            var recipeID = alldishes[i].id;
-            console.log(recipeID);
-            
-            var recipeUrl = GET_RECIPE_URL; //reset the recipeURL
-            recipeUrl += recipeID + "?";  //add on new recipe id to url
-            recipeUrl += "_app_id=fb72c077&_app_key=f6ef20b35813502c3869ff8b2341d09e";  //add my id and key
+            //skip long named recipes
+            if(alldishes[i].recipeName.length <= 35){
+                var recipeID = alldishes[i].id;
+                console.log(alldishes[i]);
 
-            //call method to load the json for the recipe id
-            getData(recipeUrl, recipeLoaded);    
-					
+                var recipeUrl = GET_RECIPE_URL; //reset the recipeURL
+                recipeUrl += recipeID + "?";  //add on new recipe id to url
+                recipeUrl += "_app_id=fb72c077&_app_key=f6ef20b35813502c3869ff8b2341d09e";  //add my id and key
+
+                //call method to load the json for the recipe id
+                getData(recipeUrl, recipeLoaded);    
+            }
         }
         //activateSlick();
         //hide the map and show the arrows and lazy button

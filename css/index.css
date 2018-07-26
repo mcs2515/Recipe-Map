@@ -195,15 +195,17 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(204, 196, 185, 0.19);
     margin-left: 3em;
     margin-right: 3em;
-    margin-top: 5em;
+    margin-top: 3em;
+    margin-bottom: 1em;
     border: 1px solid white;
 }
 
 .dish:focus {outline:0;}
 
 .dish h4{
+    max-width: 500px;
     text-align: center;
-    margin: 0;
+    margin: 0 auto;
     margin-top: .5em;
     font-family: 'Reem Kufi', sans-serif;
     font-weight: bold;
@@ -234,16 +236,15 @@ input[type="checkbox"]:checked + label:before {
     width: 100%;
     max-width: 35em;
     height: 100%;
-    max-height: 15em;
+    max-height: 14.5em;
     overflow-x: hidden;
     overflow-y: auto;
     margin: 0;
-    margin-top: 1em;
+    margin-top: .5em;
     word-wrap: break-word;
     font-family:'Montserrat', sans-serif;
     padding: 0;
-    list-style-type: none;
-    
+    list-style-type: none; 
 }
 
 .ingredients li{
@@ -265,6 +266,7 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     max-width: 30em;
     text-align: left;
+    padding-bottom: 1em;
 }
 
 .yummly_link a{ 
