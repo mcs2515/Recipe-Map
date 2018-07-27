@@ -60,6 +60,9 @@
             searchFoodURL(); 
         }
         
+        //checks if the user uses the enter key
+        document.onkeydown = checkKey;
+        
         //set up map stuff
         var mapOptions = {
           center: {lat: 39.828127, lng: -98.579404},
@@ -214,7 +217,6 @@
             //skip long named recipes
             if(alldishes[i].recipeName.length <= 35){
                 var recipeID = alldishes[i].id;
-                //reset the recipeURL
                 var recipeUrl = GET_RECIPE_URL; 
                 //add on new recipe id to url
                 recipeUrl += recipeID + "?";
@@ -268,11 +270,11 @@
         
         //add a link to the dish
         if(obj.attribution.url){
-            bigString += "<div class='yummly_link'><p><a id= href=" + obj.attribution.url + " target= '_blank'>  More at Yummly Link </a></p></div>";
+            bigString += "<div class='yummly_link'><p><a href=" + obj.attribution.url + " target= '_blank'>  More at Yummly Link </a></p></div>";
         }
-
-        divBox.innerHTML = bigString;
+        
         //add div to page
+        divBox.innerHTML = bigString;
         document.querySelector(".results").appendChild(divBox);
         
         activateSlick();
@@ -344,8 +346,8 @@
               });
         }
         else {
-          // Browser doesn't support Geolocation
-          window.alert("Geolocation is not supported by this browser.");
+            // Browser doesn't support Geolocation
+            window.alert("Geolocation is not supported by this browser.");
         }
     }
     
@@ -400,14 +402,6 @@
         //ENTER key 
         if(event.keyCode == 13){
             $("#searchButton").click();
-        }
-         // left arrow
-        else if (e.keyCode == '37') {
-            $("#prevArrow").click();
-        }
-         //right arrow
-        else if (e.keyCode == '39') {
-            $("#nextArrow").click();
         }
     }
     
