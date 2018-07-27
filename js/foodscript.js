@@ -211,7 +211,6 @@
         //clear the results section 
         document.querySelector(".results").innerHTML = "";
         
-        
         // loop through recipe ids
         for(var i= 0 ; i <alldishes.length; i++){
             //skip long named recipes

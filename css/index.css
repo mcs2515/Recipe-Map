@@ -31,6 +31,11 @@ body, html{
     margin-bottom: 20em;
 }
 
+.options{
+    width: 100%;
+    text-align: center;
+}
+
 h1{
     margin-top: 0pt;
     text-align: center;
@@ -99,10 +104,6 @@ h3{
 #searchBar, #searchButton, 
 #cuisine, #course, #lazyButton:focus {outline:0;}
 
-.options{
-    width: 100%;
-    text-align: center;
-}
 
 .options select{
     margin-bottom: 2em;
@@ -257,10 +258,6 @@ input[type="checkbox"]:checked + label:before {
     word-wrap: break-word;
 }
 
-.yummly_link{
-    width: 100%;
-}
-
 .yummly_link a:focus {outline:0;}
 
 .yummly_link p{
@@ -300,36 +297,6 @@ input[type="checkbox"]:checked + label:before {
     border: none;
 }
 
-.pageControl{
-    position: relative;
-    margin: 0 auto;
-    text-align: center;
-    display: none;
-    width: 60%;
-    margin-top: 5em;
-}
-
-#pageLabel{
-    padding: none;
-    display: inline;
-    margin-right: 0;
-}
-
-#prevArrow img, #nextArrow img{
-    width: 2em;
-    height: auto;
-    padding: 0px;
-    margin-top: -1em;
-}
-
-#nextArrow img{
-    float: right;  
-}
-
-#prevArrow img{
-    float: left;  
-}
-
 #mapDiv{
     position: relative;
     margin:0 auto;
@@ -339,8 +306,6 @@ input[type="checkbox"]:checked + label:before {
     border:2em solid rgba(255,255,255, .8);
     border-radius: 1em;
 }
-
-
 #mapPage{
     width: 100%;
     text-align: center;
@@ -449,7 +414,6 @@ input[type="checkbox"]:checked + label:before {
         width: 180pt;
     }
 
-    
     .options select{
         width: 100pt;
     }
@@ -472,13 +436,6 @@ input[type="checkbox"]:checked + label:before {
     #foodPage{
         position: relative;
         z-index: 5;
-    }
-    .pageControl{
-        margin-top: 3em;
-    }
-    
-    #pageLabel{
-        font-size: 12pt;
     }
     
     #lazyButton{
@@ -505,27 +462,7 @@ input[type="checkbox"]:checked + label:before {
         min-width: 25pt;
 /*        display: none;*/
     }
-    
-    .dish{
-        width: 100%;
-        margin: 2em;
-        position: relative;
-        display: block; 
 
-    }
-    
-    .dish:first-child{
-        margin-left: 2em;
-    }
-    
-    .dish:last-child{
-        margin-right: 2em;
-    }
-    
-    .dish img{
-        width: 80%;
-    }
-     
     .dish h4{
         font-size: 16pt;
         font-weight: bold;
@@ -535,7 +472,6 @@ input[type="checkbox"]:checked + label:before {
     
     .dish p{
         text-align: left;
-        
     }
     
     .ingredients{
@@ -557,25 +493,53 @@ input[type="checkbox"]:checked + label:before {
 }
 
 @media screen and (max-width: 480px){
-    #results{
-
-        padding-bottom: 0em;
-        margin-bottom: 0em;
-    }
-    
+  
     .dish{
         width: 100%;
+        max-width: 23em;
+        min-width: 20em;
         margin: 1em 1em;
         padding-top: 1em;
         padding-bottom: 1em;
     }
     
-    .dish:first-child{
-        margin-left: 1em;
+    .food_image img{
+        max-width: 15em;
+    }
+
+    .bookmark{
+        max-width: 2em;
+        height: 2.5em;
     }
     
-    .dish:last-child{
-        margin-right: 1em;
+    .detail_div{
+        width: 20em;
+        min-height: 15em;
+    }
+
+    .dish h4{
+        font-size: 14pt;
+        width: 100%;
+        max-width: 18em;
+    }
+    
+    .dish h5{
+        font-size: 13pt;
+    }
+
+    .ingredients{
+        width: 100%;
+        max-width: 35em;
+        height: 100%;
+        max-height: 12em; 
+    }
+
+    .ingredients li{
+        width: 23em;
+    }
+    
+    .yummly_link p{
+        width: 20em;
     }
 }
 
