@@ -276,7 +276,7 @@
         document.querySelector(".results").appendChild(divBox);
         
         activateSlick();
-		}
+    }
     
     function activateSlick(){
         if(!$(".results").hasClass('slick-initialized')){
@@ -305,36 +305,30 @@
     
     //=======================LOADS RESTAURANT LOCATIONS=================================================================
      function mapsJsonLoaded(obj){
-			 var div = document.querySelector("#mapTitle");
-			 // If there is an array of results, loop through them
-			 var allrestaurants = obj.results;
-			 clearMarkers();
-			 
-			 //console.log("allrestaurants.length = " + allrestaurants.length);
-			 //console.dir(obj);
-        
-        var bigString = "<h4 id = 'mapTitle'> Here are nearby restaurants within " + miles+" miles</h4>";
-        bigString += "<br>";
-        
-        div.innerHTML = bigString;
+         var div = document.querySelector("#mapTitle");
+         var allrestaurants = obj.results;
+         clearMarkers();
+         
+         var bigString = "<h4 id = 'mapTitle'> Here are nearby restaurants within " + miles+" miles</h4>";
+         bigString += "<br>";
+         div.innerHTML = bigString;
         
         for(var i= 0 ; i <16/*allrestaurants.length*/; i++){
-
             var title= allrestaurants[i].name + "<br>"+ allrestaurants[i].vicinity;
             var latitude=Number(allrestaurants[i].geometry.location.lat);
             var longitude=Number(allrestaurants[i].geometry.location.lng);
-
+            
             if(latitude&&longitude){
                 addMarker(latitude, longitude, title);
-            } 
-         }
+            }
+        }
          
-        document.querySelector('#lazyButton').style.display= 'none';
-        document.querySelector('#mapPage').style.display= 'block';
-        document.querySelector('#mapDiv').style.display= 'block';
-        $("#mapPage").fadeIn(500);
-        map.setZoom(11);
-    }
+         document.querySelector('#lazyButton').style.display= 'none';
+         document.querySelector('#mapPage').style.display= 'block';
+         document.querySelector('#mapDiv').style.display= 'block';
+         $("#mapPage").fadeIn(500);
+         map.setZoom(11);
+     }
     
     //======================HTML5 GEOLOCATION=========================================================================
     function getLocation(){
