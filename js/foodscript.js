@@ -53,17 +53,11 @@
         //hide the map and lazy button
         document.querySelector('#mapDiv').style.display= 'none';
         document.querySelector('#mapPage').style.display= 'none';
-       // document.querySelector('#lazyButton').style.display= 'none';
+        document.querySelector('#lazyButton').style.display= 'none';
         
         //call respective functions when buttons are pressed
         document.querySelector('#searchButton').onclick = function(){
-//            if($(window).width() <=800){
-//                document.querySelector('.menu').style.height = "33em"; 
-//            }
-//            
-//            firstSearch = true;
-            searchFoodURL();
-            
+            searchFoodURL(); 
         }
         
         //set up map stuff
@@ -78,7 +72,6 @@
         //get user's current loction with HTML5 geolocation
         getLocation();
         clearMarkers();
-        
     }
     
     //==============method creates an URL FOR YUMMLY to load info based on user input=============================
@@ -170,8 +163,7 @@
     
     //===================LOADS THE JSON and functions based on the url sent to it==================================
     function getData(url, func) {
-        //get the json
-        //console.log("loading " + url); //print out the url to json
+
         $(".results").fadeOut(500);   //give animation
         $("#mapPage").fadeOut(500);   //give animation
         
@@ -212,6 +204,7 @@
         // If there is an array of results, loop through them
         var alldishes = obj.matches;
 
+        unSlick();
         //clear the results section 
         document.querySelector(".results").innerHTML = "";
         
@@ -221,31 +214,35 @@
             //skip long named recipes
             if(alldishes[i].recipeName.length <= 35){
                 var recipeID = alldishes[i].id;
-                console.log(alldishes[i]);
-
-                var recipeUrl = GET_RECIPE_URL; //reset the recipeURL
-                recipeUrl += recipeID + "?";  //add on new recipe id to url
-                recipeUrl += "_app_id=fb72c077&_app_key=f6ef20b35813502c3869ff8b2341d09e";  //add my id and key
+                //reset the recipeURL
+                var recipeUrl = GET_RECIPE_URL; 
+                //add on new recipe id to url
+                recipeUrl += recipeID + "?";
+                //add my id and key
+                recipeUrl += "_app_id=fb72c077&_app_key=f6ef20b35813502c3869ff8b2341d09e";  
 
                 //call method to load the json for the recipe id
                 getData(recipeUrl, recipeLoaded);    
             }
         }
-        //activateSlick();
-        //hide the map and show the arrows and lazy button
-//        document.querySelector('#lazyButton').style.display= 'block';
+
+        //hide the map and show the lazy button
+        document.querySelector('#lazyButton').style.display= 'block';
         document.querySelector('#mapDiv').style.display= 'none';
         document.querySelector('#mapPage').style.display= 'none';
         $(".results").fadeIn(500);
-        
     }
     
     //======================LOADS DETAILED DISH INFO==================================================================
     function recipeLoaded(obj){
         unSlick();
+        
         //create a unique div box for each recipe id
         var divBox = document.createElement('div');
         divBox.className = "dish";
+        
+        //create a new set to check for duplicates
+        var ingredientArray = Array.from(new Set(obj.ingredientLines));
         
         //console.log(div);
         var bigString= "<img class= 'bookmark' src=media/bookmark.png >"
@@ -260,14 +257,12 @@
         }
        
         bigString += "<h5><span class='bold'>Ingredients:</span></h5>";
-
-        //create a new set to check for duplicates
-        var ingredientArray = Array.from(new Set(obj.ingredientLines));
-
         bigString+= "<ul class='ingredients'>";
+        
         for(var i=0; i<ingredientArray.length; i++){
-                bigString += "<li>"+ingredientArray[i]+"</li>";
-            }
+            bigString += "<li>"+ingredientArray[i]+"</li>";
+        }
+        
         bigString+= "</ul>";
         bigString += "</div>";
         
@@ -279,6 +274,7 @@
         divBox.innerHTML = bigString;
         //add div to page
         document.querySelector(".results").appendChild(divBox);
+        
         activateSlick();
 		}
     
@@ -287,9 +283,9 @@
             $(".results").slick({
                 dots: true,
                 arrows: false,
-								infinite:false,
-								variableWidth: true,
-								centerMode: true,
+                infinite:false,
+                variableWidth: true,
+                centerMode: true,
             });
         }
     }
@@ -333,7 +329,7 @@
             } 
          }
          
-//        document.querySelector('#lazyButton').style.display= 'none';
+        document.querySelector('#lazyButton').style.display= 'none';
         document.querySelector('#mapPage').style.display= 'block';
         document.querySelector('#mapDiv').style.display= 'block';
         $("#mapPage").fadeIn(500);

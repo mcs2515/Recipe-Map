@@ -93,6 +93,7 @@ h3{
     font-size: 15pt;
     color: white;
     background-color: #fa7a64;
+    border: none;
 }
 
 #searchBar, #searchButton, 
