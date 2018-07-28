@@ -60,6 +60,13 @@
             searchFoodURL(); 
         }
         
+         $('.togglebtn').click(function(){
+             console.log('called');
+             $(this).toggleClass('open');
+             $('.menu').toggleClass('open');
+             toggleMenu();
+          });
+        
         //checks if the user uses the enter key
         document.onkeydown = checkKey;
         
@@ -402,6 +409,19 @@
         if(event.keyCode == 13){
             $("#searchButton").click();
         }
+    }
+    
+    function toggleMenu(){
+//        if($('.menu').hasClass('open')){
+//            console.log('closing');
+//            $('.menuContent').hide();
+//            $('.menu').width(0);
+//        }
+//        else{
+//            console.log('opening');
+//            $('.menu').width(352);//352px = 22em
+//            $('.menuContent').show();
+//        }
     }
     
     window.addEventListener("load",init);

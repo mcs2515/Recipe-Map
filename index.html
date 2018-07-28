@@ -14,23 +14,30 @@
   <link rel="stylesheet" type="text/css" href="slick/slick.css"/>
   <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>
 <!--    google maps-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcOO9FkDVNRjvVH2q8x71sw0FrvxyrHiY&callback" async defer></script>
-
-    
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBcOO9FkDVNRjvVH2q8x71sw0FrvxyrHiY&callback" async defer></script>  
 </head>
 
 <body>
-    <section class="menu">
-        <div id="top">
+    <div class="menu">
+        <div class= "togglebtn open">
+            <div class= "toggleContainer">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div class="menuContent">
             <h1>To Cook or Not to Cook</h1>
 
-            <section class="search">
+            <div class="search">
                 <input id="searchBar" type= "text" size="25" maxlength="25" onfocus="if(this.value == value) { this.value = ''; }"  value="Enter dish or ingredient">
                 <button type="button" id="searchButton">Search</button>
-            </section>
+            </div>
 
-            <section class="options">
-                <h3>Cuisine:</h3>
+            <div class="options">
+                <div class="cuisine">
+                    <h3>Cuisine:</h3>
                     <select id="cuisine"> 
                         <option value="null">None</option>    
                         <option value="american">American</option>    
@@ -42,22 +49,26 @@
                         <option value="japanese">Japanese</option>      
                         <option value="barbecue">Barbecue</option>      
                     </select>
+                </div>
                 <br>
 
-                <h3>Course: </h3>
-                <select id="course"> 
-                    <option value="null">None</option>  
-                    <option value="Main Dishes">Main Dishes</option>  
-                    <option value="Desserts">Desserts</option>  
-                    <option value="Side Dishes">Side Dishes</option> 
-                    <option value="Soups">Soups</option>  
-                    <option value="Appetizers">Appetizers</option>
-                    <option value="Salads">Salads</option>
-                </select>
+                <div class="course">
+                    <h3>Course: </h3>
+                    <select id="course"> 
+                        <option value="null">None</option>  
+                        <option value="Main Dishes">Main Dishes</option>  
+                        <option value="Desserts">Desserts</option>  
+                        <option value="Side Dishes">Side Dishes</option> 
+                        <option value="Soups">Soups</option>  
+                        <option value="Appetizers">Appetizers</option>
+                        <option value="Salads">Salads</option>
+                    </select>
+                </div>
 
                 <br>
-                <h3>Allergens: </h3>
-                <section class="allergens">
+
+                <div class="allergens">
+                    <h3>Allergens: </h3>
                     <table>
                         <tr>
                             <td><input type="checkbox" id="dairy"><label class = "boxLabel" for="dairy"> Dairy</label></td>
@@ -69,22 +80,23 @@
                         </tr>
                         <tr>
                             <td><input type="checkbox" id="treeNut"><label class = "boxLabel" for="treeNut"> Tree Nut</label></td>
-                            <td><input type="checkbox" id="soy"><label class = "boxLabel" for="soy"> Soy</label></li></td>
+                            <td><input type="checkbox" id="soy"><label class = "boxLabel" for="soy"> Soy</label></td>
                         </tr>
                     </table>
-                </section>
-            </section>
+                </div>
+            </div>
+            <div id = "bottom"><button type="button" id="lazyButton" onCLick = "searchRestaurantURL()">Too Lazy?</button></div>
         </div>
-        <div id = "bottom"><button type="button" id="lazyButton" onCLick = "searchRestaurantURL()">Too Lazy?</button></div>
-    </section>
+    </div>
     
     <section id="foodPage">
-        <section id= "mapPage">
+        
+        <div id= "mapPage">
             <div id = "mapTitle"></div>
             <div id="mapDiv"></div>
-        </section>
+        </div>
 			
-        <section class="results">
-        </section>
+        <div class="results">
+        </div>
     </section>
 </body>
