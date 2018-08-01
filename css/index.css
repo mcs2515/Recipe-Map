@@ -4,6 +4,7 @@ body, html{
     width: 100%;
     height: 100%;
     margin: 0 auto;
+    overflow: hidden;
 }
 
 .menu {
@@ -37,7 +38,7 @@ body, html{
     flex-grow: 1;
     flex-shrink: 1;
     flex-basis: 0px;
-    margin-bottom: 5em;
+    margin-bottom: 4em;
 }
 
 #bottom{
@@ -53,7 +54,7 @@ body, html{
 h1{
     margin-top: 0pt;
     text-align: center;
-    padding-top: 1em;
+    padding-top: 15px;
     font-family: 'Reem Kufi', sans-serif;
     font-size: 24pt;
     color: white;
@@ -117,7 +118,6 @@ h3{
 
 #searchBar, #searchButton, 
 .cuisine, .course, #lazyButton:focus {outline:0;}
-
 
 .options select{
     margin-bottom: 2em;
@@ -213,9 +213,11 @@ input[type="checkbox"]:checked + label:before {
     margin-top: 5em;
     margin-bottom: 1em;
     border: 1px solid white;
+    cursor: -webkit-grab; cursor: grab;;
 }
 
 .dish:focus {outline:0;}
+.dish:active {cursor: -webkit-grabbing; cursor: grabbing;}
 
 .dish h4{
     max-width: 500px;
@@ -313,24 +315,14 @@ input[type="checkbox"]:checked + label:before {
 #mapDiv{
     position: relative;
     margin:0 auto;
-    padding:0;
-    width:80%;
-    height: 600px;
-    border:2em solid rgba(255,255,255, .8);
-    border-radius: 1em;
-}
-#mapPage{
-    width: 100%;
-    text-align: center;
+    width:100%;
+    height:100%;
 }
 
-#mapTitle{
-    margin-bottom: 0;
-    font-family:'Montserrat', sans-serif;
-    font-size: 16pt;
-    color: white;
-    text-shadow: 0px 0px 3px #000, -1px -1px #000, 0px 3px #000;
-    letter-spacing: 2px;
+#mapPage{
+    width: 100%;
+    height:100%;
+    text-align: center;
 }
 
 .issues{
@@ -369,9 +361,10 @@ input[type="checkbox"]:checked + label:before {
     z-index: 100;
     width: 5em;
     height: 4em;
-    background-color: #FAC565;
+    background-color: #ffba3f;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
+    cursor: pointer;
 }
 
 .toggleContainer{
@@ -390,13 +383,11 @@ input[type="checkbox"]:checked + label:before {
     cursor: pointer;
 }
 
-
 .togglebtn span{
     display: block;
     position: absolute;
     height: 5px;
     width: 100%;
-    background: #d3531a;
     border-radius: 9px;
     opacity: 1;
     left: 0;

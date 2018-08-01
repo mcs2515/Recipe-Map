@@ -59,12 +59,13 @@
         document.querySelector('#searchButton').onclick = function(){
             searchFoodURL(); 
         }
+        document.querySelector('#lazyButton').onclick = function(){
+            searchRestaurantURL(); 
+        }
         
          $('.togglebtn').click(function(){
-             console.log('called');
              $(this).toggleClass('open');
              $('.menu').toggleClass('open');
-             toggleMenu();
           });
         
         //checks if the user uses the enter key
@@ -294,6 +295,8 @@
                 infinite:false,
                 variableWidth: true,
                 centerMode: true,
+                swipeToSlide: true,
+                touchThreshold: 500,
             });
         }
     }
@@ -302,6 +305,11 @@
         if($(".results").hasClass('slick-initialized')){
             $(".results").slick("destroy");
         }
+    }
+    
+    function toggleMenu(){
+        $(this).toggleClass('open');
+         $('.menu').toggleClass('open');
     }
     
     //=======================CHECKS FOR FOOD ALLERGENS OPTIONS==========================================================
@@ -313,23 +321,18 @@
     
     //=======================LOADS RESTAURANT LOCATIONS=================================================================
      function mapsJsonLoaded(obj){
-         var div = document.querySelector("#mapTitle");
          var allrestaurants = obj.results;
          clearMarkers();
          
-         var bigString = "<h4 id = 'mapTitle'> Here are nearby restaurants within " + miles+" miles</h4>";
-         bigString += "<br>";
-         div.innerHTML = bigString;
-        
-        for(var i= 0 ; i <16/*allrestaurants.length*/; i++){
-            var title= allrestaurants[i].name + "<br>"+ allrestaurants[i].vicinity;
-            var latitude=Number(allrestaurants[i].geometry.location.lat);
-            var longitude=Number(allrestaurants[i].geometry.location.lng);
-            
-            if(latitude&&longitude){
-                addMarker(latitude, longitude, title);
-            }
-        }
+         for(var i= 0 ; i <16/*allrestaurants.length*/; i++){
+             var title= allrestaurants[i].name + "<br>"+ allrestaurants[i].vicinity;
+             var latitude=Number(allrestaurants[i].geometry.location.lat);
+             var longitude=Number(allrestaurants[i].geometry.location.lng);
+             
+             if(latitude&&longitude){
+                 addMarker(latitude, longitude, title);
+             }
+         }
          
          document.querySelector('#lazyButton').style.display= 'none';
          document.querySelector('#mapPage').style.display= 'block';
@@ -409,19 +412,6 @@
         if(event.keyCode == 13){
             $("#searchButton").click();
         }
-    }
-    
-    function toggleMenu(){
-//        if($('.menu').hasClass('open')){
-//            console.log('closing');
-//            $('.menuContent').hide();
-//            $('.menu').width(0);
-//        }
-//        else{
-//            console.log('opening');
-//            $('.menu').width(352);//352px = 22em
-//            $('.menuContent').show();
-//        }
     }
     
     window.addEventListener("load",init);

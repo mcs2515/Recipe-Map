@@ -28,71 +28,72 @@
             </div>
         </div>
         <div class="menuContent">
-            <h1>To Cook or Not to Cook</h1>
+            <div id="top">
+                <h1>To Cook or Not to Cook</h1>
 
-            <div class="search">
-                <input id="searchBar" type= "text" size="25" maxlength="25" onfocus="if(this.value == value) { this.value = ''; }"  value="Enter dish or ingredient">
-                <button type="button" id="searchButton">Search</button>
+                <div class="search">
+                    <input id="searchBar" type= "text" size="25" maxlength="25" onfocus="if(this.value == value) { this.value = ''; }"  value="Enter dish or ingredient">
+                    <button type="button" id="searchButton">Search</button>
+                </div>
+
+                <div class="options">
+                    <div class="cuisine">
+                        <h3>Cuisine:</h3>
+                        <select id="cuisine"> 
+                            <option value="null">None</option>    
+                            <option value="american">American</option>    
+                            <option value="italian">Italian</option>    
+                            <option value="mexican">Mexican</option>    
+                            <option value="chinese">Chinese</option>    
+                            <option value="indian">Indian</option>    
+                            <option value="thai">Thai</option>    
+                            <option value="japanese">Japanese</option>      
+                            <option value="barbecue">Barbecue</option>      
+                        </select>
+                    </div>
+                    <br>
+
+                    <div class="course">
+                        <h3>Course: </h3>
+                        <select id="course"> 
+                            <option value="null">None</option>  
+                            <option value="Main Dishes">Main Dishes</option>  
+                            <option value="Desserts">Desserts</option>  
+                            <option value="Side Dishes">Side Dishes</option> 
+                            <option value="Soups">Soups</option>  
+                            <option value="Appetizers">Appetizers</option>
+                            <option value="Salads">Salads</option>
+                        </select>
+                    </div>
+
+                    <br>
+
+                    <div class="allergens">
+                        <h3>Allergens: </h3>
+                        <table>
+                            <tr>
+                                <td><input type="checkbox" id="dairy"><label class = "boxLabel" for="dairy"> Dairy</label></td>
+                                <td><input type="checkbox" id="gluten"><label class = "boxLabel" for="gluten"> Gluten</label></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="peanut"><label class = "boxLabel" for="peanut"> Peanut</label></td>
+                                <td><input type="checkbox" id="seafood"><label class = "boxLabel" for="seafood"> Seafood</label></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" id="treeNut"><label class = "boxLabel" for="treeNut"> Tree Nut</label></td>
+                                <td><input type="checkbox" id="soy"><label class = "boxLabel" for="soy"> Soy</label></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
-
-            <div class="options">
-                <div class="cuisine">
-                    <h3>Cuisine:</h3>
-                    <select id="cuisine"> 
-                        <option value="null">None</option>    
-                        <option value="american">American</option>    
-                        <option value="italian">Italian</option>    
-                        <option value="mexican">Mexican</option>    
-                        <option value="chinese">Chinese</option>    
-                        <option value="indian">Indian</option>    
-                        <option value="thai">Thai</option>    
-                        <option value="japanese">Japanese</option>      
-                        <option value="barbecue">Barbecue</option>      
-                    </select>
-                </div>
-                <br>
-
-                <div class="course">
-                    <h3>Course: </h3>
-                    <select id="course"> 
-                        <option value="null">None</option>  
-                        <option value="Main Dishes">Main Dishes</option>  
-                        <option value="Desserts">Desserts</option>  
-                        <option value="Side Dishes">Side Dishes</option> 
-                        <option value="Soups">Soups</option>  
-                        <option value="Appetizers">Appetizers</option>
-                        <option value="Salads">Salads</option>
-                    </select>
-                </div>
-
-                <br>
-
-                <div class="allergens">
-                    <h3>Allergens: </h3>
-                    <table>
-                        <tr>
-                            <td><input type="checkbox" id="dairy"><label class = "boxLabel" for="dairy"> Dairy</label></td>
-                            <td><input type="checkbox" id="gluten"><label class = "boxLabel" for="gluten"> Gluten</label></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" id="peanut"><label class = "boxLabel" for="peanut"> Peanut</label></td>
-                            <td><input type="checkbox" id="seafood"><label class = "boxLabel" for="seafood"> Seafood</label></td>
-                        </tr>
-                        <tr>
-                            <td><input type="checkbox" id="treeNut"><label class = "boxLabel" for="treeNut"> Tree Nut</label></td>
-                            <td><input type="checkbox" id="soy"><label class = "boxLabel" for="soy"> Soy</label></td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            <div id = "bottom"><button type="button" id="lazyButton" onCLick = "searchRestaurantURL()">Too Lazy?</button></div>
+            <div id = "bottom"><button type="button" id="lazyButton" >Too Lazy?</button></div>
         </div>
     </div>
     
     <section id="foodPage">
         
         <div id= "mapPage">
-            <div id = "mapTitle"></div>
             <div id="mapDiv"></div>
         </div>
 			
