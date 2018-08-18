@@ -6,7 +6,7 @@
     
     var GET_RECIPE_URL = "https://api.yummly.com/v1/api/recipe/";
     var GOOGLE_PLACES_URL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?";
-    var GOOGLEPLACES_URL_KEY = "AIzaSyCungfivBrAQpvrF-jwK092ZPvLyNwPvFM";
+    var GOOGLEPLACES_URL_KEY = "AIzaSyBYwl-j_jklBYluqXB9RpObYK_Geg9P5yI";
     
     //checkbox bool variables
     var dairyCheck = false,
