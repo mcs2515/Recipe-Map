@@ -7,6 +7,14 @@ body, html{
     overflow: hidden;
 }
 
+.noSelect {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
 .menu {
     min-width: 27em;
     height: 100%;
@@ -326,14 +334,13 @@ input[type="checkbox"]:checked + label:before {
 }
 
 .issues{
-    position: relative;
-    margin: 0 auto;
     text-align: center;
-    font-family:'Montserrat', sans-serif;
-    font-size: 16pt;
-    color: white;
-    text-shadow: 0px 0px 3px #000, -1px -1px #000, 0px 3px #000;
-    letter-spacing: 2px;
+    padding-left: 13em;
+    margin-top: 15em;
+    font-family: 'Reem Kufi', sans-serif;
+    font-weight: bold;
+    font-size: 20pt;
+    color: #393630;
 }
 
 .ingredients::-webkit-scrollbar-track
