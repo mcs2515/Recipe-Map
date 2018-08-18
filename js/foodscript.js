@@ -156,7 +156,7 @@
         
         var googleURL = encodeURIComponent(url);
                                
-        var nodeURL = "https://mcs2515-project3.herokuapp.com/?url=" + googleURL;
+        var nodeURL = "https://recipe-map.herokuapp.com//?url=" + googleURL;
         
         // Add circle overlay and bind to marker
         var circle = new google.maps.Circle({
