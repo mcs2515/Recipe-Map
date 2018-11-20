@@ -322,15 +322,24 @@
     //=======================LOADS RESTAURANT LOCATIONS=================================================================
      function mapsJsonLoaded(obj){
          var allrestaurants = obj.results;
+
          clearMarkers();
          
          for(var i= 0 ; i <16/*allrestaurants.length*/; i++){
-             var title= allrestaurants[i].name + "<br>"+ allrestaurants[i].vicinity;
+			 
+			 var vicinity = allrestaurants[i].vicinity;
+			 var address = vicinity.split(',');
+
+			 if(address.length == 3){
+				 address.splice(0, 1); //remove the first value in array
+			 }
+			 
+             var name= allrestaurants[i].name;
              var latitude=Number(allrestaurants[i].geometry.location.lat);
              var longitude=Number(allrestaurants[i].geometry.location.lng);
              
              if(latitude&&longitude){
-                 addMarker(latitude, longitude, title);
+                 addMarker(latitude, longitude, name, address);
              }
          }
          
@@ -361,16 +370,16 @@
     }
     
     //===================CREATES MARKERS for each lat and lng you send to it==========================================
-    function addMarker(latitude, longitude, title){
+    function addMarker(latitude, longitude, name, address){
 //      console.log(latitude + ", " + longitude + ", " + title + ", " + map);
         var position = {lat: latitude, lng: longitude};
         var marker = new google.maps.Marker({position: position, map:map});
-        marker.setTitle(title);
+        marker.setTitle(name);
         
         //add a listener for the click event
         google.maps.event.addListener(marker, 'click', function(e){
             //have an info window pop up
-            makeInfoWindow(this.position, this.title);
+            makeInfoWindow(position, name, address);
         });
     
       //add the marker
@@ -378,7 +387,7 @@
     }
     
     //====================DISPLAY name and adress in the INFO WINDOW==========================================================
-     function makeInfoWindow(position, msg){
+     function makeInfoWindow(position, name, address){
         //close old infowindow if it exists
         if(infoWindow)infoWindow.close();
 
@@ -386,7 +395,7 @@
         infoWindow=new google.maps.InfoWindow({
             map: map,
             position: position,
-            content: "<b>" + msg + "</br>"
+            content: "<b>" + name + "</b><br/><b>"+ address+ "</b>",
         });
     }
     
