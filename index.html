@@ -5,6 +5,9 @@
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Recipe Map</title>
+	<!--    google maps-->
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaUxW3O4_A3uGXc-MXGcGWZf1HMdWQR9M&callback"></script>
+	
 	<!--    Vue-->
 	<script src="https://cdn.jsdelivr.net/npm/vue"></script>
 	
@@ -14,19 +17,20 @@
 	
 	<!--	Slick-->
 	<script type="text/javascript" src="slick/slick.min.js"></script>
-	
-	<!--	CSS-->
-	<link REL="StyleSheet" TYPE="text/css" HREF="css/index.css">
-	<script src="js/foodscript.js"></script>
 	<link rel="stylesheet" type="text/css" href="slick/slick.css" />
 	<link rel="stylesheet" type="text/css" href="slick/slick-theme.css" />
 	
-	<!--    google maps-->
-	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCaUxW3O4_A3uGXc-MXGcGWZf1HMdWQR9M&callback" async defer></script>
+	<!--	CSS-->
+	<link REL="StyleSheet" TYPE="text/css" HREF="css/index.css">
+	
+	
+	<!--	Custom Scripts-->
+<!--	<script src="js/foodscript.js"></script>-->
+	<script src="js/main.js"></script>
 </head>
 
 <body>
-	<div class="menu">
+	<div class="menu" id="app">
 		<div class="togglebtn open">
 			<div class="toggleContainer">
 				<span></span>
@@ -42,7 +46,7 @@
 
 				<div class="search">
 					<input id="searchBar" type="text" size="25" maxlength="25" onfocus="if(this.value == value) { this.value = ''; }" value="Enter dish or ingredient">
-					<button type="button" id="searchButton">Search</button>
+					<button type="button" id="searchButton" @click="searchFoodURL">Search</button>
 				</div>
 
 				<div class="options">
@@ -81,22 +85,40 @@
 						<h3>Allergens: </h3>
 						<table>
 							<tr>
-								<td><input type="checkbox" id="dairy"><label class="boxLabel" for="dairy"> Dairy</label></td>
-								<td><input type="checkbox" id="gluten"><label class="boxLabel" for="gluten"> Gluten</label></td>
+								<td>
+									<input type="checkbox" id="dairy">
+									<label class="boxLabel" for="dairy"> Dairy</label>
+								</td>
+								<td>
+									<input type="checkbox" id="gluten">
+									<label class="boxLabel" for="gluten"> Gluten</label>
+								</td>
 							</tr>
 							<tr>
-								<td><input type="checkbox" id="peanut"><label class="boxLabel" for="peanut"> Peanut</label></td>
-								<td><input type="checkbox" id="seafood"><label class="boxLabel" for="seafood"> Seafood</label></td>
+								<td>
+									<input type="checkbox" id="peanut">
+									<label class="boxLabel" for="peanut"> Peanut</label>
+								</td>
+								<td>
+									<input type="checkbox" id="seafood">
+									<label class="boxLabel" for="seafood"> Seafood</label>
+								</td>
 							</tr>
 							<tr>
-								<td><input type="checkbox" id="treeNut"><label class="boxLabel" for="treeNut"> Tree Nut</label></td>
-								<td><input type="checkbox" id="soy"><label class="boxLabel" for="soy"> Soy</label></td>
+								<td>
+									<input type="checkbox" id="treeNut">
+									<label class="boxLabel" for="treeNut"> Tree Nut</label>
+								</td>
+								<td>
+									<input type="checkbox" id="soy">
+									<label class="boxLabel" for="soy"> Soy</label>
+								</td>
 							</tr>
 						</table>
 					</div>
 				</div>
 			</div>
-			<div id="bottom"><button type="button" id="lazyButton">Too Lazy?</button></div>
+			<div id="bottom"><button type="button" id="lazyButton" @click="searchRestaurantURL">Too Lazy?</button></div>
 		</div>
 	</div>
 
