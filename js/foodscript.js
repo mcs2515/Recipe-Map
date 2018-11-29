@@ -17,6 +17,7 @@
         soyCheck = false,
         treeNutCheck= false;
     
+	//urls for food allergies
     var allergyUrl= "&allowedAllergy[]=";
     var dairyUrl = "396^Dairy-Free",
         eggUrl = "397^Egg-Free",
